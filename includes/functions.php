@@ -5,6 +5,7 @@
  * @return string URL base
  */
 function getBaseUrl() {
+    // Determina o protocolo (http ou https)
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
     $scriptName = $_SERVER['SCRIPT_NAME'];
@@ -15,11 +16,7 @@ function getBaseUrl() {
         return $protocol . '://' . $host . '/';
     }
     
-    // Se estiver em uma subpasta
-    if (strpos($dirName, '/pages') !== false || strpos($dirName, '/chat') !== false) {
-        $dirName = dirname($dirName);
-    }
-    
+    // Retorna a URL base sem subpastas específicas
     return $protocol . '://' . $host . $dirName . '/';
 }
 
@@ -42,6 +39,7 @@ function redirect($page) {
  * @return void
  */
 function showAlert($message, $type = 'info') {
+    // Armazena a mensagem na sessão
     $_SESSION['alert'] = [
         'message' => $message,
         'type' => $type
@@ -56,7 +54,7 @@ function showAlert($message, $type = 'info') {
 function getAlert() {
     if (isset($_SESSION['alert'])) {
         $alert = $_SESSION['alert'];
-        unset($_SESSION['alert']);
+        unset($_SESSION['alert']); // Remove a mensagem após exibição
         
         return '<div class="alert alert-' . $alert['type'] . '">' . $alert['message'] . '</div>';
     }

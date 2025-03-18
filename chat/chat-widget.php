@@ -14,11 +14,7 @@
     </div>
     
     <div class="chat-messages" id="chat-messages">
-        <?php include 'chat-messages.php'; ?>
-    </div>
-    
-    <div class="chat-options" id="chat-options">
-        <?php include 'chat-options.php'; ?>
+        <!-- Mensagens do chat -->
     </div>
     
     <div class="chat-input">
